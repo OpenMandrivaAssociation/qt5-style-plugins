@@ -4,7 +4,7 @@
 Summary:	Additional style plugins for Qt5
 Name:		qt5-style-plugins
 Version:	0
-Release:	0.%{snapshot}.1
+Release:	0.%{snapshot}.2
 License:	LGPLv2.1+
 Group:		System/Libraries
 URL:		https://github.com/qtproject/%{oname}
@@ -19,6 +19,8 @@ Suggests:	qt5-style-plastique
 
 %description
 Additional style plugins for Qt5 moved out of Qt5 base tree.
+
+%files
 
 #----------------------------------------------------------------------------
 
