@@ -1,14 +1,14 @@
-%define snapshot 20130213
 %define oname qtstyleplugins
 
 Summary:	Additional style plugins for Qt5
 Name:		qt5-style-plugins
-Version:	0
-Release:	0.%{snapshot}.2
+Version:	5.0.0
+Release:	1
 License:	LGPLv2.1+
 Group:		System/Libraries
-URL:		https://github.com/qtproject/%{oname}
-Source0:	%{oname}-%{snapshot}.tar.bz2
+Url:		https://github.com/qtproject/%{oname}
+Source0:	%{oname}-%{version}.tar.gz
+Patch0:		qtstyleplugins-5.0.0-float.patch
 BuildRequires:	qmake5
 BuildRequires:	pkgconfig(Qt5Core)
 BuildRequires:	pkgconfig(Qt5Gui)
@@ -58,7 +58,8 @@ Plastique style for Qt5.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -n %{oname}-%{snapshot}
+%setup -q -n %{oname}-%{version}
+%patch0 -p1
 
 %build
 %qmake_qt5 %{oname}.pro
@@ -66,4 +67,6 @@ Plastique style for Qt5.
 
 %install
 make install INSTALL_ROOT=%{buildroot}
+
+rm -rf %{buildroot}%{_libdir}/cmake
 
