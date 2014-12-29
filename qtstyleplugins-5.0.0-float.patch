@@ -1,0 +1,38 @@
+From 8ff2ac6035fb1d01f5c0054ba14afb949410e3a7 Mon Sep 17 00:00:00 2001
+From: Alexandre Rostovtsev <tetromino@gentoo.org>
+Date: Wed, 4 Jun 2014 20:27:53 -0400
+Subject: [PATCH] Cleanlooks style: Fix floating point exception
+
+In QCleanlooksStyle::drawControl, if indeterminate == true and
+rect.width() == 4, we will end up with slideWidth of zero, and
+take a mod by zero when calculating the value of step.
+
+Identical code in Qt4 Cleanlooks causes a crash in Quassel 0.10;
+see https://bugs.gentoo.org/show_bug.cgi?id=507124
+
+Instead, calculate slideWidth based on max(width, minWidth) where
+minWidth was already set as 4, ensuring that slideWidth >= 2.
+
+Change-Id: Id3e39437665be326358f68c48eaf1249b6880c4a
+Reviewed-by: Giuseppe D'Angelo <giuseppe.dangelo@kdab.com>
+Reviewed-by: J-P Nurmi <jpnurmi@digia.com>
+---
+ src/plugins/styles/cleanlooks/qcleanlooksstyle.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/plugins/styles/cleanlooks/qcleanlooksstyle.cpp b/src/plugins/styles/cleanlooks/qcleanlooksstyle.cpp
+index 8d89e39..1e82ed7 100644
+--- a/src/plugins/styles/cleanlooks/qcleanlooksstyle.cpp
++++ b/src/plugins/styles/cleanlooks/qcleanlooksstyle.cpp
+@@ -1749,7 +1749,7 @@ void QCleanlooksStyle::drawControl(ControlElement element, const QStyleOption *o
+                     progressBar.setRect(rect.right() - 1 - width, rect.top() + 1, width + 1, rect.height() - 3);
+                 }
+             } else {
+-                int slideWidth = ((rect.width() - 4) * 2) / 3;
++                int slideWidth = (qMax(rect.width() - 4, minWidth) * 2) / 3;
+                 int step = ((animateStep * slideWidth) / progressAnimationFps) % slideWidth;
+                 if ((((animateStep * slideWidth) / progressAnimationFps) % (2 * slideWidth)) >= slideWidth)
+                     step = slideWidth - step;
+-- 
+1.9.3
+

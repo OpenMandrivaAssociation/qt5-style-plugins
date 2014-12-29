@@ -7,7 +7,7 @@ Release:	1
 License:	LGPLv2.1+
 Group:		System/Libraries
 Url:		https://github.com/qtproject/%{oname}
-Source0:	%{oname}-%{version}.tar.gz
+Source0:	http://download.qt.io/community_releases/additional_qt_src_pkgs/%{oname}-src-%{version}.tar.gz
 Patch0:		qtstyleplugins-5.0.0-float.patch
 BuildRequires:	qmake5
 BuildRequires:	pkgconfig(Qt5Core)
@@ -58,7 +58,7 @@ Plastique style for Qt5.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -n %{oname}-%{version}
+%setup -q -n %{oname}-src-%{version}
 %patch0 -p1
 
 %build
