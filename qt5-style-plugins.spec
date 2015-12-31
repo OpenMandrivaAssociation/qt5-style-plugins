@@ -3,7 +3,7 @@
 Summary:	Additional style plugins for Qt5
 Name:		qt5-style-plugins
 Version:	5.0.0
-Release:	2
+Release:	3
 License:	LGPLv2.1+
 Group:		System/Libraries
 Url:		https://github.com/qtproject/%{oname}
@@ -69,4 +69,3 @@ Plastique style for Qt5.
 make install INSTALL_ROOT=%{buildroot}
 
 rm -rf %{buildroot}%{_libdir}/cmake
-
