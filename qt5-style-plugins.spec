@@ -3,7 +3,7 @@
 Summary:	Additional style plugins for Qt5
 Name:		qt5-style-plugins
 Version:	5.0.0
-Release:	3
+Release:	4
 License:	LGPLv2.1+
 Group:		System/Libraries
 Url:		https://github.com/qtproject/%{oname}
