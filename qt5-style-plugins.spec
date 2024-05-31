@@ -58,12 +58,13 @@ Plastique style for Qt5.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -n %{oname}-src-%{version}
-%patch0 -p1
+%autosetup -p1 -n %{oname}-src-%{version}
+
+%conf
+%qmake_qt5 %{oname}.pro
 
 %build
-%qmake_qt5 %{oname}.pro
-%make
+%make_build
 
 %install
 make install INSTALL_ROOT=%{buildroot}
